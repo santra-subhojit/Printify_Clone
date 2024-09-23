@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printify - Custom Products</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigation bar styling */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        nav .buttons {
+            display: flex;
+        }
+
+        .btn-nav {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background-color: white;
+            color: #333;
+            border: 2px solid #333;
+            margin-right: 10px;
+        }
+
+        .btn-signup {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-login:hover, .btn-signup:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main content */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+            margin: 50px auto;
+            width: 80%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .content {
+            max-width: 50%;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 0 0 20px;
+            color: #333;
+            animation: fadeInUp 1s ease;
+        }
+
+        .features {
+            list-style-type: none;
+            padding: 0;
+            color: #666;
+        }
+
+        .features li {
+            margin: 10px 0;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeInLeft 1s ease forwards;
+        }
+
+        .features li:nth-child(1) { animation-delay: 0.2s; }
+        .features li:nth-child(2) { animation-delay: 0.4s; }
+        .features li:nth-child(3) { animation-delay: 0.6s; }
+
+        .features li:before {
+            content: "✔";
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: white;
+            color: #333;
+            border: 2px solid #333;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image {
+            max-width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 1s ease;
+        }
+
+        .image img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features section */
+        .features-section {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f9f9f9;
+        }
+
+        .feature {
+            max-width: 30%;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.2s; }
+        .feature:nth-child(2) { animation-delay: 0.4s; }
+        .feature:nth-child(3) { animation-delay: 0.6s; }
+
+        .feature img {
+            width: 80px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover img {
+            transform: scale(1.1);
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Custom products section */
+        * { 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        [data-gjs-type^="cj"]:empty {
+            background-color: #D4D4D8;
+            height: 50px;
+            width: 100%;
+            padding: 5px;
+        }
+
+        [data-gjs-type^="cj"]:empty::before {
+            content: "Add content";
+            background-color: #FFB26D;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 30px;
+            padding: 0 10px;
+            opacity: 0.3;
+            border-radius: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Custom products section */
+        .custom-products-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .custom-products-section .text {
+            max-width: 40%;
+            opacity: 0;
+            animation: fadeInLeft 1s ease forwards;
+        }
+
+        .custom-products-section .image-container {
+            max-width: 40%;
+            opacity: 0;
+            animation: fadeInRight 1s ease forwards;
+        }
+
+        .custom-products-section h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .custom-products-section p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .custom-products-section a {
+            color: #4CAF50;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .custom-products-section a:hover {
+            color: #3e8e41;
+            padding-left: 5px;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Final features section */
+        .final-features {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f9f9f9;
+        }
+
+        .final-feature {
+            max-width: 30%;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .final-feature:nth-child(1) { animation-delay: 0.2s; }
+        .final-feature:nth-child(2) { animation-delay: 0.4s; }
+
+        .final-feature img {
+            width: 100px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .final-feature:hover img {
+            transform: rotate(10deg);
+        }
+
+        .final-feature h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .final-feature p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Connect store section */
+        .connect-store {
+            text-align: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .connect-store h2 {
+            font-size: 36px;
+            color: #333;
+            animation: fadeInUp 1s ease;
+        }
+
+        .connect-store img {
+            width: 100px;
+            margin: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .connect-store img:hover {
+            transform: translateY(-10px);
+        }
+
+        .store-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        /* Custom solutions section */
+        .custom-solutions {
+            background-color: #f0f8f7;
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-solutions h3 {
+            font-size: 24px;
+            color: #333;
+            margin-right: 20px;
+        }
+
+        .custom-solutions button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-solutions button:hover {
+            background-color: #3e8e41;
+            transform: scale(1.05);
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 50px;
+            background-color: #f9f9f9;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .testimonial-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 30%;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .testimonial:nth-child(1) { animation-delay: 0.2s; }
+        .testimonial:nth-child(2) { animation-delay: 0.4s; }
+        .testimonial:nth-child(3) { animation-delay: 0.6s; }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial img {
+            border-radius: 50%;
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial h3 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .testimonial p {
+            color: #666;
+        }
+
+        .testimonial .stars {
+            color: #f4b400;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container, .custom-products-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content, .custom-products-section .text, .custom-products-section img {
+                max-width: 100%;
+            }
+
+            .image {
+                margin-top: 30px;
+            }
+
+            .features-section, .final-features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature, .final-feature {
+                max-width: 80%;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav .buttons {
+                margin-top: 20px;
+            }
+
+            .container, .custom-products-section, .testimonials {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .testimonial {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .store-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .custom-solutions {
+                flex-direction: column;
+            }
+
+            .custom-solutions h3 {
+                margin-bottom: 20px;
+            }
+        }
+        
+                /* New styles for profit calculator */
+                    * { 
+                        box-sizing: border-box; 
+                    }
+                    
+                    body {
+                        margin: 0;
+                        font-family: Arial, sans-serif;
+                    }
+            
+                    [data-gjs-type^="cj"]:empty {
+                        background-color: #D4D4D8;
+                        height: 50px;
+                        width: 100%;
+                        padding: 5px;
+                    }
+            
+                    [data-gjs-type^="cj"]:empty::before {
+                        content: "Add content";
+                        background-color: #FFB26D;
+                        color: #000;
+                        font-size: 16px;
+                        font-weight: bold;
+                        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 30px;
+                        padding: 0 10px;
+                        opacity: 0.3;
+                        border-radius: 3px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+            
+                    /* Profit Calculator Section */
+                    .profit-calculator {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background-color: #1e2b3a;
+                        color: white;
+                        padding: 40px;
+                        margin: 50px 0;
+                    }
+            
+                    .profit-calculator-content {
+                        flex: 1;
+                    }
+            
+                    .profit-calculator h2 {
+                        font-size: 32px;
+                        margin-bottom: 10px;
+                    }
+            
+                    .profit-calculator p {
+                        font-size: 16px;
+                        margin-bottom: 20px;
+                    }
+            
+                    .profit-table {
+                        background-color: #2c3e50;
+                        padding: 20px;
+                        border-radius: 10px;
+                        margin-bottom: 20px;
+                    }
+            
+                    .profit-table div {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 10px;
+                    }
+            
+                    .profit-table .profit {
+                        color: #4CAF50;
+                    }
+            
+                    .start-selling-btn {
+                        background-color: #4CAF50;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+            
+                    .profit-calculator-image {
+                        flex: 1;
+                        text-align: right;
+                    }
+            
+                    .profit-calculator-image img {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                /* Footer styles */
+                footer {
+                    background-color: #f9f9f9;
+                    padding: 50px 0;
+                }
+        
+                .footer-content {
+                    display: flex;
+                    justify-content: space-between;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                }
+        
+                .footer-column {
+                    flex: 1;
+                    margin-right: 20px;
+                }
+        
+                .footer-column h3 {
+                    font-size: 18px;
+                    margin-bottom: 20px;
+                }
+        
+                .footer-column ul {
+                    list-style: none;
+                    padding: 0;
+                }
+        
+                .footer-column ul li {
+                    margin-bottom: 10px;
+                }
+        
+                .footer-column ul li a {
+                    color: #666;
+                    text-decoration: none;
+                }
+        
+                .social-icons {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 20px;
+                }
+        
+                .social-icons a {
+                    margin-left: 10px;
+                    color: #666;
+                    font-size: 24px;
+                }
+        
+                .footer-bottom {
+                    text-align: center;
+                    margin-top: 50px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                .menu-toggle {
+                    display: none;
+                    background: none;
+                    border: none;
+                    font-size: 24px;
+                    cursor: pointer;
+                }
+        
+                @media (max-width: 768px) {
+                    nav {
+                        flex-wrap: wrap;
+                    }
+        
+                    .menu-toggle {
+                        display: block;
+                    }
+        
+                    nav ul {
+                        display: none;
+                        width: 100%;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+        
+                    nav ul.show {
+                        display: flex;
+                    }
+        
+                    nav ul li {
+                        margin: 10px 0;
+                    }
+        
+                    nav .buttons {
+                        width: 100%;
+                        justify-content: center;
+                        margin-top: 10px;
+                    }
+                }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Printify</div>
+        <button class="menu-toggle">☰</button>
+        <ul>
+            <li><a href="#">Catalog</a></li>
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Use-cases</a></li>
+            <li><a href="#">Need help?</a></li>
+        </ul>
+        <div class="buttons">
+            <button class="btn-nav btn-login">Log in</button>
+            <button class="btn-nav btn-signup">Sign up</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content">
+            <h1>Create and sell <br> custom products</h1>
+            <ul class="features">
+                <li>100% Free to use</li>
+                <li>900+ High-Quality Products</li>
+                <li>Largest global print network</li>
+            </ul>
+            <div class="buttons">
+                <button class="btn btn-primary">Start for free</button>
+                <button class="btn btn-outline">How it works?</button>
+            </div>
+        </div>
+        <div class="image">
+            <img src="https://via.placeholder.com/300" alt="Custom Product">
+        </div>
+    </div>
+
+    <!-- New Section: Features with Icons -->
+    <div class="features-section">
+        <div class="feature">
+            <img src="https://via.placeholder.com/80" alt="Higher Profits Icon">
+            <h3>Higher Profits</h3>
+            <p>We offer some of the lowest prices in the industry because print providers continuously compete to win your business.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/80" alt="Robust Scaling Icon">
+            <h3>Robust Scaling</h3>
+            <p>Easily handle peak holiday seasons, with our wide network of partners and automatic routing functionality.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/80" alt="Best Selection Icon">
+            <h3>Best Selection</h3>
+            <p>With 900+ products and top quality brands, you can choose the best products for your business.</p>
+        </div>
+    </div>
+
+    <!-- New Section: Image with Custom Products -->
+    <div class="custom-products-section">
+        <div class="text">
+            <h2>Create Custom Products</h2>
+            <p>With just a few clicks, you can design and sell custom products online. You set the prices, we handle the printing and fulfillment.</p>
+            <a href="#">Learn more about creating custom products</a>
+        </div>
+        <img src="https://via.placeholder.com/400" alt="Custom Products">
+    </div>
+
+    <!-- New Section: Final Feature Blocks -->
+    <div class="final-features">
+        <div class="final-feature">
+            <img src="https://via.placeholder.com/100" alt="Sell on Your Terms Icon">
+            <h3>Sell on Your Terms</h3>
+            <p>No up-front fees, no minimum order, and the freedom to sell where you want.</p>
+        </div>
+        <div class="final-feature">
+            <img src="https://via.placeholder.com/100" alt="We Handle Fulfillment Icon">
+            <h3>We Handle Fulfillment</h3>
+            <p>Once you make a sale, we’ll fulfill the order and send it to your customer.</p>
+        </div>
+    </div>
+
+    <div class="connect-store">
+        <h2>Connect Your Store</h2>
+        <p>Printify easily integrates with major e-commerce platforms and marketplaces.</p>
+        <div class="store-icons">
+            <img src="https://via.placeholder.com/100" alt="API">
+            <img src="https://via.placeholder.com/100" alt="Shopify">
+            <img src="https://via.placeholder.com/100" alt="Etsy">
+            <img src="https://via.placeholder.com/100" alt="WooCommerce">
+            <img src="https://via.placeholder.com/100" alt="eBay">
+        </div>
+    </div>
+
+    <!-- Custom Solutions Section -->
+    <div class="custom-solutions">
+        <h3>Need custom solutions?</h3>
+        <button>Talk to Sales</button>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <h2>What our customers say</h2>
+        <div class="testimonial-cards">
+            <div class="testimonial">
+                <img src="https://via.placeholder.com/80" alt="Customer Photo">
+                <h3>John Doe</h3>
+                <p>"Printify helped me scale my business quickly with their easy-to-use platform."</p>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="testimonial">
+                <img src="https://via.placeholder.com/80" alt="Customer Photo">
+                <h3>Jane Smith</h3>
+                <p>"The print quality and variety of products are unbeatable."</p>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="testimonial">
+                <img src="https://via.placeholder.com/80" alt="Customer Photo">
+                <h3>Mike Johnson</h3>
+                <p>"The customer support team was incredibly helpful and responsive."</p>
+                <div class="stars">★★★★★</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="profit-calculator">
+        <div class="profit-calculator-content">
+            <h2>Make Money, Risk-Free</h2>
+            <p>You pay for fulfillment only when you make a sale</p>
+            <div class="profit-table" data-gjs-type="cj-profit-table">
+                <div>
+                    <span>You sell a t-shirt</span>
+                    <span>$30</span>
+                </div>
+                <div>
+                    <span>You pay for production</span>
+                    <span>$12</span>
+                </div>
+                <div class="profit">
+                    <span>Your profit</span>
+                    <span>$18</span>
+                </div>
+            </div>
+            <button class="start-selling-btn">Start selling</button>
+            <p>100% Free to use - 900+ Products - Largest print network</p>
+        </div>
+        <div class="profit-calculator-image">
+            <img src="https://via.placeholder.com/400x300" alt="Woman watering money plant">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Integrations</h3>
+                <ul>
+                    <li><a href="#">Shopify</a></li>
+                    <li><a href="#">Etsy</a></li>
+                    <li><a href="#">eBay</a></li>
+                    <li><a href="#">WooCommerce</a></li>
+                    <li><a href="#">Wix</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Guides</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Shipping times</a></li>
+                    <li><a href="#">Mockup generator</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Start selling</h3>
+                <ul>
+                    <li><a href="#">Custom T-shirts</a></li>
+                    <li><a href="#">Custom Hoodies</a></li>
+                    <li><a href="#">Custom Mugs</a></li>
+                    <li><a href="#">Custom Socks</a></li>
+                    <li><a href="#">Custom Stickers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Printify</h3>
+                <ul>
+                    <li><a href="#">Print on Demand</a></li>
+                    <li><a href="#">Print Providers</a></li>
+                    <li><a href="#">Expense Tracker</a></li>
+                    <li><a href="#">Printify Experts</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Printify, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for social icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // JavaScript for toggle menu
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+    </script>
+</body>
+
+</html>
