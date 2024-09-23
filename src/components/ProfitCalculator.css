@@ -1,0 +1,108 @@
+/* New styles for Profit Calculator */
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+[data-gjs-type^="cj"]:empty {
+    background-color: #D4D4D8;
+    height: 50px;
+    width: 100%;
+    padding: 5px;
+}
+
+[data-gjs-type^="cj"]:empty::before {
+    content: "Add content";
+    background-color: #FFB26D;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 0 10px;
+    opacity: 0.3;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Profit Calculator Section */
+.profit-calculator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e2b3a;
+    color: white;
+    padding: 40px;
+    margin: 50px 0;
+    border-radius: 12px;
+}
+
+.profit-calculator-content {
+    flex: 1;
+}
+
+.profit-calculator h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.profit-calculator p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.profit-table {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.profit-table div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.profit-table .profit {
+    color: #4CAF50;
+}
+
+.start-selling-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.start-selling-btn:hover {
+    background-color: #43A047;
+}
+
+.profit-calculator-image {
+    flex: 1;
+    text-align: right;
+}
+
+.profit-calculator-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
